@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">four_meals_dining</string>
+    <string name="_4_meals">FOUR MEALS</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="today_s_menu">Today\'s Menu</string>
+    <string name="food_item">Food Item</string>
+    <string name="price">Price</string>
+    <string name="login">LOGIN</string>
+    <string name="username_reg_number">Username/Reg Number</string>
+    <string name="password">Password</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign Up.</string>
+    <string name="continue_">CONTINUE</string>
+    <string name="name">First Name</string>
+    <string name="surname">Surname</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="submit">Submit</string>
+    <string name="by_clicking_submit_below_i_agree_to">By clicking submit below, I agree to ....</string>
+    <string name="_18_20">$18.20</string>
+    <string name="food">Food</string>
+    <string name="checkout">Checkout</string>
+
+</resources>
