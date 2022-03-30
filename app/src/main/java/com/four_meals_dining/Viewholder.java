@@ -18,4 +18,5 @@ public class Viewholder extends RecyclerView.ViewHolder {
         mealNameTV = itemView.findViewById(R.id.TVMealName);
         mealPriceTV = itemView.findViewById(R.id.TVMealPrice);
     }
+
 }
