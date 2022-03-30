@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitesmoke"
+    tools:context=".HomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@id/action_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:elevation="0dp">
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/tool_bar" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/SVMeals"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/action_bar"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/searchbox_outline"
+            android:clickable="true"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="Search by meal name.">
+
+
+        </androidx.appcompat.widget.SearchView>
+
+
+        <TextView
+            android:id="@+id/TVWhatEating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SVMeals"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/today_s_menu"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TVSeeAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SVMeals"
+            android:layout_marginStart="160sp"
+            android:layout_marginTop="25dp"
+            android:layout_toRightOf="@id/TVWhatEating"
+            android:text="@string/see_all"
+            android:textColor="@color/tomato"
+            android:textSize="12sp"
+            android:textStyle="" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RVHomeItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TVWhatEating"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:flow_horizontalAlign="center" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@color/whitesmoke"
+            app:elevation="50dp"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/bottom_navigation">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+        <TextView
+            android:id="@+id/TVSuggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RVHomeItems"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/healthy_suggestion"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RVSuggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TVSuggestion"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:flow_horizontalAlign="center" />
+
+        <TextView
+            android:id="@+id/TVMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/RVHomeItems"
+            android:layout_marginStart="125sp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@id/TVSuggestion"
+            android:text="@string/more"
+            android:textColor="@color/tomato"
+            android:textSize="12sp"
+            android:textStyle="" />
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

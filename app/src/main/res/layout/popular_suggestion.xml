@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/whitesmoke"
+    app:cardCornerRadius="24dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true"
+    app:cardElevation="5dp"
+    android:clickable="true"
+    android:focusable="true">
+
+
+        <ImageView
+            android:id="@+id/IVPopularFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_gravity="center"
+            android:src="@drawable/egg_sandwich" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_round_shopping_cart_24"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            app:tint="@color/white"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp" />
+        <TextView
+            android:id="@+id/TVPopularFoodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FOOD NAME"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/whitesmoke"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="2"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/TVPopularPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_18_20"
+            android:textSize="12sp"
+            android:textColor="@color/tomato"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_box"/>
+
+
+
+
+
+</androidx.cardview.widget.CardView>
