@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Four_meals_dining">
         <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrdersActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
