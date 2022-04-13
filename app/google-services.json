@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "792789962791",
+    "project_id": "fourmealsapp",
+    "storage_bucket": "fourmealsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792789962791:android:0b114310714d7c35f8be02",
+        "android_client_info": {
+          "package_name": "com.four_meals_dining"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792789962791-c5ptrg4p9hugu8i5erus57qbsgef5na1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4JvxloQ6GE45ceKLBJg2ad52db1J8xFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792789962791-c5ptrg4p9hugu8i5erus57qbsgef5na1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
