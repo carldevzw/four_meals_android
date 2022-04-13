@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openHomeActivity= new Intent(LoginActivity.this, HomeActivity.class);
+                Intent openHomeActivity= new Intent(LoginActivity.this, AdminHomeActivity.class);
                 startActivity(openHomeActivity);
             }
         });

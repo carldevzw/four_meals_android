@@ -22,7 +22,7 @@
         android:layout_gravity="left"/>
 
     <ImageButton
-        android:id="@+id/IBRemoveButton"
+        android:id="@+id/IBReady"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_baseline_event_available_24"

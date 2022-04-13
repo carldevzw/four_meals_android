@@ -82,9 +82,9 @@
             android:id="@+id/nav_bottom"
             android:layout_width="match_parent"
             android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
             android:background="@color/whitesmoke"
             app:elevation="50dp"
-            android:layout_alignParentBottom="true"
             app:menu="@menu/bottom_navigation">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

@@ -31,5 +31,11 @@
     <string name="sort_by">Sort by</string>
     <string name="cart">Cart</string>
     <string name="confirmed">Pending</string>
+    <string name="available">Available</string>
+    <string name="add">Add</string>
+    <string name="hey_admin">HEY ADMIN!</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="what_are_you_serving_today">What are you serving today?</string>
+    <string name="meal_details">Meal details:</string>
 
 </resources>

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Four_meals_dining">
         <activity
+            android:name=".AdminHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".AccountActivity"
             android:exported="false" />
         <activity

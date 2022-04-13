@@ -15,8 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class OrdersActivity extends AppCompatActivity {
 
-    Button btnCart, btnConfirm;
-    BottomNavigationView bottomNavigationView;
+    private Button btnCart, btnConfirm;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
