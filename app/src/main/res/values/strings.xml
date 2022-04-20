@@ -6,7 +6,7 @@
     <string name="food_item">Food Item</string>
     <string name="price">Price</string>
     <string name="login">LOGIN</string>
-    <string name="username_reg_number">Username/Reg Number</string>
+    <string name="username_reg_number">Username/Email</string>
     <string name="password">Password</string>
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign Up.</string>
     <string name="continue_">CONTINUE</string>
@@ -37,5 +37,7 @@
     <string name="meal_name">Meal Name</string>
     <string name="what_are_you_serving_today">What are you serving today?</string>
     <string name="meal_details">Meal details:</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="app_label">4 Meals</string>
 
 </resources>
