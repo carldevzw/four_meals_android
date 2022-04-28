@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class Meal_Orders_Adapter extends RecyclerView.Adapter<OrdersViewholder> {
@@ -31,8 +33,12 @@ public class Meal_Orders_Adapter extends RecyclerView.Adapter<OrdersViewholder> 
 
         Meal_Model model = Meal_ModelArrayList.get(position);
         holder.orderMealNameTV.setText(model.getMeal_name());
-        holder.orderMealPriceTV.setText("" + model.getPrice());
-        holder.orderMealIV.setImageResource(model.getMeal_imageSrc());
+        holder.orderMealPriceTV.setText(model.getPrice());
+        Glide.with(context)
+                .load(model.getMeal_imageSrc())
+                .placeholder(R.drawable.ic_baseline_no_food_24)
+                .centerCrop()
+                .into(holder.orderMealIV);
     }
     @Override
     public int getItemCount() {

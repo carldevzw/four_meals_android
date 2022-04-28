@@ -21,17 +21,6 @@
         android:src="@drawable/egg_sandwich"
         android:layout_gravity="left"/>
 
-    <ImageButton
-        android:id="@+id/IBRemoveButton"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:src="@drawable/ic_baseline_remove_circle_24"
-        android:background="@null"
-        android:layout_gravity="top|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="24dp"
-        android:scaleType="fitCenter"
-        app:tint="@color/tomato" />
 
     <TextView
         android:id="@+id/TVFoodItemOrder"
@@ -50,9 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_18_20"
-        android:textSize="12sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/tomato"
         android:layout_marginStart="110dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="35dp"
         />
 
 </androidx.cardview.widget.CardView>

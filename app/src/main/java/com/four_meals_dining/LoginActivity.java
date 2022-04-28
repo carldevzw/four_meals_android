@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,18 +23,20 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    ImageView logo;
-    TextView TV_Login,TV_DHAC;
-    TextInputLayout til_username, til_password;
-    Button login;
 
-    FirebaseAuth firebaseAuth;
-
+    private ImageView logo;
+    private TextView TV_Login,TV_DHAC;
+    private TextInputLayout til_username, til_password;
+    private Button login;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        LoadingDialogue loadingDialogue= new LoadingDialogue(LoginActivity.this);
+
 
         logo= findViewById(R.id.IVAppLogo);
 
@@ -47,10 +50,10 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth= FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser() != null) {
-            finish();
-            return;
-        }
+//        if(firebaseAuth.getCurrentUser() != null) {
+//            finish();
+//            return;
+//        }
 
         TV_DHAC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                loadingDialogue.startLoadingDialogue();
                 String Username= til_username.getEditText().getText().toString().trim();
                 String Password= til_password.getEditText().getText().toString().trim();
                 loginUser(Username, Password);
-
             }
         });
     }
@@ -80,9 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            //userOrAdminLogin(username);
+                            userOrAdminLogin(username);
                             Toast.makeText(getApplicationContext(), "Welcome Admin", Toast.LENGTH_LONG).show();
-
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), "Password or Username Wrong!", Toast.LENGTH_LONG).show();
@@ -96,11 +98,9 @@ public class LoginActivity extends AppCompatActivity {
         if(username.contains("fourmealsapp.com")){
             Toast.makeText(getApplicationContext(), "Welcome Admin", Toast.LENGTH_LONG).show();
             startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
-            FirebaseUser user = firebaseAuth.getCurrentUser();
         }else{
             Toast.makeText(getApplicationContext(), "User Login Success", Toast.LENGTH_LONG).show();
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            FirebaseUser user = firebaseAuth.getCurrentUser();
         }
     }
 }

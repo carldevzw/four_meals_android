@@ -24,63 +24,45 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutButtons"
-            android:layout_width="wrap_content"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/ordersTabs"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/action_bar"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="24dp"
-            android:orientation="horizontal">
+            android:background="@color/whitesmoke"
+            android:layout_below="@id/action_bar">
 
-            <Button
-                android:id="@+id/btnCart"
-                android:layout_width="150dp"
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/tomato"
-                app:strokeWidth="2dp"
-                app:icon="@drawable/ic_round_shopping_cart_24"
-                android:text="@string/cart"
-                android:textStyle="bold"
-                />
+                android:icon="@drawable/ic_round_shopping_cart_24"
+                android:text="Cart" />
 
-            <Button
-                android:id="@+id/btnConfirm"
-                android:layout_width="150dp"
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/confirmed"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/tomato"
-                app:strokeWidth="2dp"
-                app:icon="@drawable/ic_baseline_check_circle_24"
-                android:layout_marginStart="24dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
+                android:icon="@drawable/fui_ic_check_circle_black_128dp"
+                android:text="@string/pending" />
 
+        </com.google.android.material.tabs.TabLayout>
 
-
-        <FrameLayout
-            android:id="@+id/fragmentContainer"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/layoutButtons"
-            android:layout_above="@+id/nav_bottom">
-        </FrameLayout>
-
-
+            android:layout_above="@id/nav_bottom"
+            android:layout_below="@+id/ordersTabs"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_bottom"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="wrap_content"
             android:background="@color/whitesmoke"
-            app:elevation="50dp"
             android:layout_alignParentBottom="true"
             app:menu="@menu/bottom_navigation">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

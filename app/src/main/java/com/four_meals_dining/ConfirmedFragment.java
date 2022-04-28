@@ -2,6 +2,7 @@ package com.four_meals_dining;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,11 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class ConfirmedFragment extends Fragment {
     private RecyclerView mealRV;
+    private FirebaseFirestore db;
 
     private ArrayList<Meal_Model> mealModelArrayList;
     View view;
@@ -23,7 +33,7 @@ public class ConfirmedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_confirmed, container, false);
-        listData();
+       // listData();
         initRecyclerView(view);
         return view;
     }
@@ -35,18 +45,33 @@ public class ConfirmedFragment extends Fragment {
 
         ordersRecyclerView.setLayoutManager(linearLayoutManager);
 
-        Meal_Con_Orders_Adapter meal_con_orders_adapter= new Meal_Con_Orders_Adapter(getActivity(), mealModelArrayList);
-        ordersRecyclerView.setAdapter(meal_con_orders_adapter);
-
-    }
-
-    public void listData(){
         mealModelArrayList = new ArrayList<>();
-        mealModelArrayList.add(new Meal_Model("Bread and Eggs", 4.5, R.drawable.egg_sandwich));
-        mealModelArrayList.add(new Meal_Model("Plain Chips", 3.2, R.drawable.plain_chips));
-        mealModelArrayList.add(new Meal_Model("Plain Rice", 4.12, R.drawable.plain_rice));
-        mealModelArrayList.add(new Meal_Model("Sadza Beans", 1.5, R.drawable.sadza_beans));
-        mealModelArrayList.add(new Meal_Model("Sadza Beef", 2, R.drawable.sadza_beef));
-        mealModelArrayList.add(new Meal_Model("Sadza Chicken", 6.5, R.drawable.sadza_chicken));
+
+        db= FirebaseFirestore.getInstance();
+
+        db.collection("orders").whereEqualTo("Confirmed", true)
+                .orderBy("meal_name", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        if(error != null){
+
+                            Toast.makeText(getContext(),"Database error", Toast.LENGTH_LONG).show();
+                        }else {
+                            assert value != null;
+                            for(DocumentChange dc: value.getDocumentChanges()){
+                                if(dc.getType()== DocumentChange.Type.ADDED){
+                                    mealModelArrayList.add(dc.getDocument().toObject(Meal_Model.class));
+                                }
+                                Meal_Con_Orders_Adapter meal_orders_adapter= new Meal_Con_Orders_Adapter(getActivity(), mealModelArrayList);
+                                ordersRecyclerView.setAdapter(meal_orders_adapter);
+                                meal_orders_adapter.notifyDataSetChanged();
+
+                            }
+                        }
+                    }
+                });
     }
+
 }

@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/IVPopularFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
@@ -26,14 +26,15 @@
             android:src="@drawable/egg_sandwich" />
 
         <ImageButton
+            android:id="@+id/btnPopCart"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
             android:src="@drawable/ic_round_shopping_cart_24"
             android:background="@null"
             android:scaleType="fitCenter"
-            app:tint="@color/white"
-            android:layout_marginEnd="16dp"
+            app:tint="@color/tomato"
+            android:layout_marginEnd="32dp"
             android:layout_marginTop="16dp" />
         <TextView
             android:id="@+id/TVPopularFoodName"
@@ -41,24 +42,25 @@
             android:layout_height="wrap_content"
             android:text="FOOD NAME"
             android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/whitesmoke"
+            android:textSize="24sp"
+            android:textColor="@color/white"
             android:shadowDx="-2"
             android:shadowDy="-2"
             android:shadowRadius="2"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"/>
         <TextView
             android:id="@+id/TVPopularPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_18_20"
-            android:textSize="12sp"
-            android:textColor="@color/tomato"
-            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="32dp"
             android:layout_marginBottom="8dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/rounded_box"/>
+          />
 
 
 

@@ -39,5 +39,7 @@
     <string name="meal_details">Meal details:</string>
     <string name="sign_up">SIGN UP</string>
     <string name="app_label">4 Meals</string>
+    <string name="pending">Pending</string>
+    <string name="confirm_order">CONFIRM ORDER</string>
 
 </resources>

@@ -14,7 +14,7 @@
 
     <ImageView
         android:id="@+id/IVFoodPicture"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="140dp"
         android:scaleType="centerCrop"
         android:src="@drawable/egg_sandwich" />
@@ -25,10 +25,10 @@
         android:layout_height="wrap_content"
         android:text="@string/food_item"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textSize="12sp"
+
         android:layout_gravity="bottom"
-        android:layout_marginBottom="24sp"
+        android:layout_marginBottom="18sp"
         android:layout_marginStart="16dp"/>
 
     <TextView
@@ -36,14 +36,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/tomato"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:text="@string/_18_20"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="1dp"/>
 
     <ImageButton
+        android:id="@+id/btnMenuCart"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_round_shopping_cart_24"

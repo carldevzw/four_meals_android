@@ -24,18 +24,20 @@
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/activity_main.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/activity_orders.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/activity_signup.xml" value="0.2" />
+        <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/available_item.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_available_meals.xml" value="0.1935897435897436" />
-        <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_cart.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_cart.xml" value="0.16" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_confirmed.xml" value="0.1" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_meal_details.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_meals_list.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_order_meals.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/fragment_orders_list.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/laoding_dialogue.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/menu_items.xml" value="0.4" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/menu_view.xml" value="0.22521367521367522" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/order_item.xml" value="0.4" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/pending_item.xml" value="0.20512820512820512" />
-        <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/popular_suggestion.xml" value="0.264" />
+        <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/popular_suggestion.xml" value="0.176" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/tool_bar.xml" value="0.264" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/tool_bar_admin.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/dell/Desktop/four_meals_app/app/src/main/res/layout/tool_bar_mealslist.xml" value="0.20512820512820512" />
