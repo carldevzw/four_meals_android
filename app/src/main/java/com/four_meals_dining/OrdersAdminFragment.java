@@ -1,17 +1,16 @@
 package com.four_meals_dining;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -27,24 +26,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class ConfirmedFragment extends Fragment {
-    private RecyclerView mealRV;
-    private FirebaseFirestore db;
-    private static final String TAG = "ConfirmedFragment";
+public class OrdersAdminFragment extends Fragment {
+
+    TextView TVOrders;
     private ArrayList<Meal_Model> mealModelArrayList;
+    FirebaseFirestore db;
+
     View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_confirmed, container, false);
-       // listData();
+
+        view= inflater.inflate(R.layout.fragment_orders_admin, container, false);
         initRecyclerView(view);
         return view;
+
     }
 
     public void initRecyclerView(View view){
+
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -53,7 +54,7 @@ public class ConfirmedFragment extends Fragment {
         cal.setTime(date);
         String todaysDate = dateFormat.format(date);
 
-        RecyclerView ordersRecyclerView= view.findViewById(R.id.RVConMeals);
+        RecyclerView ordersRecyclerView= view.findViewById(R.id.RVorderItems);
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getActivity());
 
         ordersRecyclerView.setLayoutManager(linearLayoutManager);
@@ -61,31 +62,30 @@ public class ConfirmedFragment extends Fragment {
         mealModelArrayList = new ArrayList<>();
 
         db= FirebaseFirestore.getInstance();
+        String TAG= "Orders Admin Error";
 
         db.collection("orders")
-                .whereEqualTo("Date", todaysDate)
-                .whereEqualTo("Confirmed", true)
-                .orderBy("meal_name", Query.Direction.ASCENDING)
+                .whereEqualTo("Confirmed", true).whereEqualTo("Date", todaysDate)
+                .orderBy("Count", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         if(error != null){
-                            Log.e(TAG, "Fetch may have returned null", error);
+                            Log.e(TAG, "Database fetch may have returned null", error);
                         }else {
                             assert value != null;
                             for(DocumentChange dc: value.getDocumentChanges()){
                                 if(dc.getType()== DocumentChange.Type.ADDED){
                                     mealModelArrayList.add(dc.getDocument().toObject(Meal_Model.class));
                                 }
-                                Meal_Con_Orders_Adapter meal_orders_adapter= new Meal_Con_Orders_Adapter(getActivity(), mealModelArrayList);
-                                ordersRecyclerView.setAdapter(meal_orders_adapter);
-                                meal_orders_adapter.notifyDataSetChanged();
+                                Meal_Orders_Admin_Adapter meal_orders_admin_adapter= new Meal_Orders_Admin_Adapter(getActivity(), mealModelArrayList);
+                                ordersRecyclerView.setAdapter(meal_orders_admin_adapter);
+                                meal_orders_admin_adapter.notifyDataSetChanged();
 
                             }
                         }
                     }
                 });
     }
-
 }

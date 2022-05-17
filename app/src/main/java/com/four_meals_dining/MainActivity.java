@@ -19,7 +19,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
   }
 
     public void listMeals(){
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Choose time zone in which you want to interpret your Date
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
+        cal.setTime(date);
+        String todaysDate = dateFormat.format(date);
 
         mealModelArrayList = new ArrayList<>();
 
@@ -78,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
         db= FirebaseFirestore.getInstance();
 
-        db.collection("meals").orderBy("meal_name", Query.Direction.ASCENDING)
+        db.collection("meals")
+                .whereEqualTo("Date", todaysDate)
+                .orderBy("meal_name", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

@@ -40,6 +40,11 @@ public class AdminHomeActivity extends AppCompatActivity {
                     overridePendingTransition(0,0);
                     break;
                 }
+                case R.id.orders:{
+                    replaceFragment(new OrdersAdminFragment());
+                    overridePendingTransition(0,0);
+                    break;
+                }
             }
             return true;
         });

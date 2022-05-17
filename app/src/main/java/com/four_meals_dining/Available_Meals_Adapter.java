@@ -34,7 +34,7 @@ public class Available_Meals_Adapter extends RecyclerView.Adapter<OrdersViewhold
 
         Meal_Model model = Meal_ModelArrayList.get(position);
         holder.orderMealNameTV.setText(model.getMeal_name());
-        holder.orderMealPriceTV.setText(model.getPrice());
+        holder.orderMealPriceTV.setText("$" + model.getPrice());
         Glide.with(context)
                 .load(model.getMeal_imageSrc())
                 .placeholder(R.drawable.ic_baseline_no_food_24)

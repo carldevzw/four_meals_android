@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/whitesmoke"
+    app:cardCornerRadius="8dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true"
+    app:cardElevation="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@color/whitesmoke">
+
+    <ImageView
+        android:id="@+id/IVOrderPicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/egg_sandwich"
+        android:layout_gravity="left"/>
+
+    <TextView
+        android:id="@+id/TVMealOrders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num_placeholders"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="32dp"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:textColor="@color/tomato"
+        />
+
+    <TextView
+        android:id="@+id/TVFoodItemOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/food_item"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/black"
+        android:layout_marginStart="110dp"
+
+        />
+
+
+</androidx.cardview.widget.CardView>

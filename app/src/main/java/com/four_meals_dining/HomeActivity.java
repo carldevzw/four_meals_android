@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -21,10 +22,16 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final String TAG = "HomeActivity";
     private TextView seeALl;
     private ImageButton btnCart;
     private RecyclerView popularRV, suggestionRV;
@@ -56,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
             switch (item.getItemId()){
                 case R.id.home:{
-                    Toast.makeText(HomeActivity.this, "Already Home", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "User is home already");
                     break;
                 }
                 case R.id.account:{
@@ -78,6 +85,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void listPopularMeals() {
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Choose time zone in which you want to interpret your Date
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
+        cal.setTime(date);
+        String todaysDate = dateFormat.format(date);
 
         mealModelArrayList = new ArrayList<>();
 
@@ -89,13 +103,15 @@ public class HomeActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        db.collection("meals").orderBy("meal_name", Query.Direction.ASCENDING)
+        db.collection("meals")
+                .whereEqualTo("Date", todaysDate)
+                .orderBy("Count", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         if (error != null) {
-                            Toast.makeText(getApplicationContext(), "Firestore error", Toast.LENGTH_LONG).show();
+                            Log.e(TAG, "Fetch may have returned null", error);
                         } else {
                             assert value != null;
                             for (DocumentChange dc : value.getDocumentChanges()) {
@@ -104,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
                                 }
                                 Popular_Meal_Adapter mealAdapter = new Popular_Meal_Adapter(HomeActivity.this, mealModelArrayList);
                                 popularRV.setAdapter(mealAdapter);
-                                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
+                                Log.i(TAG, "Fetched");
                                 mealAdapter.notifyDataSetChanged();
                             }
                         }
@@ -113,6 +129,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void listSuggestedMeals(){
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Choose time zone in which you want to interpret your Date
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
+        cal.setTime(date);
+        String todaysDate = dateFormat.format(date);
 
         mealModelArrayList = new ArrayList<>();
 
@@ -125,13 +148,15 @@ public class HomeActivity extends AppCompatActivity {
 
         db= FirebaseFirestore.getInstance();
 
-        db.collection("meals").orderBy("meal_name", Query.Direction.ASCENDING)
+        db.collection("meals")
+                .whereEqualTo("Date", todaysDate)
+                .orderBy("meal_name", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         if(error != null){
-                                Toast.makeText(getApplicationContext(),"Firestore error", Toast.LENGTH_LONG).show();
+                            Log.e(TAG, "Fetch may have returned null", error);
                         }else {
                             assert value != null;
                             for(DocumentChange dc: value.getDocumentChanges()){
@@ -140,7 +165,7 @@ public class HomeActivity extends AppCompatActivity {
                                 }
                                 Popular_Meal_Adapter mealAdapter = new Popular_Meal_Adapter(HomeActivity.this,mealModelArrayList);
                                 suggestionRV.setAdapter(mealAdapter);
-                                Toast.makeText(getApplicationContext(),"Updated", Toast.LENGTH_LONG).show();
+                                Log.i(TAG, "Fetched");
                                 mealAdapter.notifyDataSetChanged();
 
                             }

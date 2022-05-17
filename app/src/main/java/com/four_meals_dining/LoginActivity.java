@@ -96,10 +96,10 @@ public class LoginActivity extends AppCompatActivity {
     private void userOrAdminLogin(String username) {
 
         if(username.contains("fourmealsapp.com")){
-            Toast.makeText(getApplicationContext(), "Welcome Admin", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Welcome Admin", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
         }else{
-            Toast.makeText(getApplicationContext(), "User Login Success", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "User Login Success", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         }
     }

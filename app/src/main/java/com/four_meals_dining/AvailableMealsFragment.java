@@ -34,10 +34,16 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class AvailableMealsFragment extends Fragment {
 
+    private static final String TAG = "AvailableMealsFragment";
     private Available_Meals_Adapter available_meals_adapter;
     private AvailableMealsAdapter mealsAdapter;
     RecyclerView mealRV;
@@ -63,46 +69,15 @@ public class AvailableMealsFragment extends Fragment {
         return view;
     }
 
-//    public void initRecyclerView(View view) {
-//
-//        mealModelArrayList = new ArrayList<>();
-//
-//        db= FirebaseFirestore.getInstance();
-//        mealsReference= db.collection("meals");
-//
-//        Query query= mealsReference.orderBy("Meal Name", Query.Direction.ASCENDING);
-//
-//        FirestoreRecyclerOptions<Meal_Model> options= new FirestoreRecyclerOptions.Builder<Meal_Model>()
-//                .setQuery(query, Meal_Model.class).build();
-//        mealsAdapter= new AvailableMealsAdapter(options);
-//
-//        if(progressDialog.isShowing()){
-//            progressDialog.dismiss();
-//        }
-//
-//        mealRV= view.findViewById(R.id.RVMealItems);
-//        mealRV.setHasFixedSize(true);
-//        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getActivity());
-//
-//        mealRV.setLayoutManager(linearLayoutManager);
-//        mealsAdapter.startListening();
-//        mealRV.setAdapter(mealsAdapter);
-//
-//    }
-//
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        mealsAdapter.startListening();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        mealsAdapter.stopListening();
-//    }
-
     public void listData(){
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Choose time zone in which you want to interpret your Date
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
+        cal.setTime(date);
+        String todaysDate = dateFormat.format(date);
 
         mealModelArrayList = new ArrayList<>();
 
@@ -111,12 +86,11 @@ public class AvailableMealsFragment extends Fragment {
 
         mealRV.setLayoutManager(linearLayoutManager);
 
-//        available_meals_adapter= new Available_Meals_Adapter(getActivity(), mealModelArrayList);
-//        mealRV.setAdapter(available_meals_adapter);
-
         db= FirebaseFirestore.getInstance();
 
-        db.collection("meals").orderBy("meal_name", Query.Direction.ASCENDING)
+        db.collection("meals")
+                .whereEqualTo("Date", todaysDate)
+                .orderBy("meal_name", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -124,7 +98,7 @@ public class AvailableMealsFragment extends Fragment {
                         if(error != null){
                             if(progressDialog.isShowing()){
                                 progressDialog.dismiss();
-                                Toast.makeText(getContext(),"Firestore error", Toast.LENGTH_LONG).show();
+                                Log.e(TAG, "Fetch may have returned null", error);
                             }
                         }else {
                             assert value != null;
@@ -134,7 +108,7 @@ public class AvailableMealsFragment extends Fragment {
                                 }
                                 available_meals_adapter= new Available_Meals_Adapter(getActivity(), mealModelArrayList);
                                 mealRV.setAdapter(available_meals_adapter);
-                                Toast.makeText(getContext(),"Updated", Toast.LENGTH_LONG).show();
+                                Log.i(TAG, "Fetched");
                                // available_meals_adapter.notifyDataSetChanged();
                                 if(progressDialog.isShowing()){
                                     progressDialog.dismiss();

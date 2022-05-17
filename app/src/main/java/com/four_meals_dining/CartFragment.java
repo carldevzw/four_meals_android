@@ -27,13 +27,19 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 
 public class CartFragment extends Fragment {
 
+    private static final String TAG = "CartFragment";
     private RecyclerView mealRV;
     FirebaseFirestore db;
     private Button btnConfirm;
@@ -63,6 +69,13 @@ public class CartFragment extends Fragment {
     }
 
     public void initRecyclerView(View view){
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Choose time zone in which you want to interpret your Date
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
+        cal.setTime(date);
+        String todaysDate = dateFormat.format(date);
 
         RecyclerView ordersRecyclerView= view.findViewById(R.id.RVCartMeals);
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getActivity());
@@ -73,14 +86,15 @@ public class CartFragment extends Fragment {
 
         db= FirebaseFirestore.getInstance();
 
-        db.collection("orders").orderBy("meal_name", Query.Direction.ASCENDING)
+        db.collection("orders")
+                .whereEqualTo("Date", todaysDate)
+                .orderBy("meal_name", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         if(error != null){
-
-                                Toast.makeText(getContext(),"Database error", Toast.LENGTH_LONG).show();
+                            Log.e(TAG, "Fetch may have returned null", error);
                         }else {
                             assert value != null;
                             for(DocumentChange dc: value.getDocumentChanges()){
@@ -95,7 +109,6 @@ public class CartFragment extends Fragment {
                         }
                     }
                 });
-
     }
 
     public void confirmMeals(){
@@ -112,6 +125,16 @@ public class CartFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 document.getReference().update("Confirmed", true);
+
+                                db.collection("meals").document(document.getId()).update("Count", +1)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.i(TAG, "Meals count +1");
+                                                }
+                                            }
+                                        });
                             }
                         } else {
                             Log.e(TAG, "Error getting documents: ", task.getException());

@@ -43,7 +43,7 @@ public class Popular_Meal_Adapter extends RecyclerView.Adapter<PopularViewholder
 
         Meal_Model model = Meal_ModelArrayList.get(position);
         holder.popualarMealNameTV.setText(model.getMeal_name());
-        holder.popualarMealPriceTV.setText(model.getPrice());
+        holder.popualarMealPriceTV.setText("$" + model.getPrice());
         Glide.with(context)
                 .load(model.getMeal_imageSrc())
                 .placeholder(R.drawable.ic_baseline_no_food_24)
