@@ -43,5 +43,6 @@
     <string name="confirm_order">CONFIRM ORDER</string>
     <string name="orders">Orders</string>
     <string name="num_placeholders">2</string>
+    <string name="your_cart_is_empty">Your cart is empty.</string>
 
 </resources>

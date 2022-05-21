@@ -77,6 +77,7 @@ public class AvailableMealsFragment extends Fragment {
         // Choose time zone in which you want to interpret your Date
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
         cal.setTime(date);
+
         String todaysDate = dateFormat.format(date);
 
         mealModelArrayList = new ArrayList<>();

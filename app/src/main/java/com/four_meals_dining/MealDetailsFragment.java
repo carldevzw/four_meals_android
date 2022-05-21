@@ -95,6 +95,7 @@ public class MealDetailsFragment extends Fragment {
 
         // Choose time zone in which you want to interpret your Date
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
+        int day = cal.get(Calendar.DAY_OF_MONTH);
         cal.setTime(date);
         String todaysDate = dateFormat.format(date);
 
@@ -129,25 +130,24 @@ public class MealDetailsFragment extends Fragment {
                                     meal.put("Date", todaysDate);
 
                                     // Add a new document with a generated ID
-                                    db.collection("meals")
-                                            .add(meal)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    db.collection("meals").document(mealName + " " + day)
+                                            .set(meal)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    if(progressDialog.isShowing()){
+                                                public void onSuccess(Void unused) {
+                                                    if (progressDialog.isShowing()) {
                                                         progressDialog.dismiss();
                                                         tilMealName.getEditText().setText(null);
                                                         tilMealPrice.getEditText().setText(null);
-                                                        Toast.makeText(getContext(), "Meal added", Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(getContext(), "Meal added", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
+                                            }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
                                                     if(progressDialog.isShowing()){
                                                         progressDialog.dismiss();
-                                                        Toast.makeText(getContext(), "Error adding meal" + e, Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(getContext(), "Error adding meal, SEE LOGS" + e, Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             });
@@ -164,6 +164,5 @@ public class MealDetailsFragment extends Fragment {
                         Toast.makeText(getContext(), "Picture upload failed", Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 }

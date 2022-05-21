@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Adapter;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private RecyclerView mealRV;
     private FirebaseFirestore db;
     private ArrayList<Meal_Model> mealModelArrayList;
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         if(error != null){
-                            Toast.makeText(getApplicationContext(),"Firestore error", Toast.LENGTH_LONG).show();
+                            Log.w(TAG, "Snapshot may have returned null.");
                         }else {
                             assert value != null;
                             for(DocumentChange dc: value.getDocumentChanges()){
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 Meal_Adapter mealAdapter = new Meal_Adapter(MainActivity.this,mealModelArrayList);
                                 mealRV.setAdapter(mealAdapter);
-                                Toast.makeText(MainActivity.this,"Updated", Toast.LENGTH_LONG).show();
+                                Log.i(TAG, "Snapshot Updated.");
                                 mealAdapter.notifyDataSetChanged();
 
                             }

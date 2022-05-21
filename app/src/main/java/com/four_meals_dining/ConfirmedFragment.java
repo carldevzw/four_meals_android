@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -60,9 +63,13 @@ public class ConfirmedFragment extends Fragment {
 
         mealModelArrayList = new ArrayList<>();
 
-        db= FirebaseFirestore.getInstance();
 
-        db.collection("orders")
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        db= FirebaseFirestore.getInstance();
+        String userId= firebaseUser.getUid();
+
+        CollectionReference collectionReference= db.collection("users").document(userId).collection("orders");
+                 collectionReference
                 .whereEqualTo("Date", todaysDate)
                 .whereEqualTo("Confirmed", true)
                 .orderBy("meal_name", Query.Direction.ASCENDING)

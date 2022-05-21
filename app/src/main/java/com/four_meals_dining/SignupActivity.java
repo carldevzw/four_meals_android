@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,6 +31,7 @@ import java.util.regex.Pattern;
 
 public class SignupActivity extends AppCompatActivity {
 
+    private static final String TAG = "SignupActivity";
     TextView signup, policy;
     TextInputLayout til_fName, til_surname, til_su_username, til_su_password, til_con_password;
     Button submit;
@@ -177,30 +179,31 @@ public class SignupActivity extends AppCompatActivity {
     public void newUserSign(String fName, String surname, String username, String password ){
 
         db = FirebaseFirestore.getInstance();
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+
+        String userID= firebaseUser.getUid();
+
         Map<String, Object> user = new HashMap<>();
         user.put("First Name", fName);
         user.put("Surname", surname);
         user.put("Username", username);
         user.put("Password", password);
 
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("users").document(userID)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getApplicationContext(),
-                                "DocumentSnapshot added with ID: " + documentReference.getId(),
-                                Toast.LENGTH_LONG).
-                                show();
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Account Created");
+                        Toast.makeText(SignupActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error adding document" + e,
-                                Toast.LENGTH_LONG)
-                                .show();
+                        Log.e(TAG, "Sign up exception", e);
+                        Toast.makeText(getApplicationContext(), "Error, try again." + e, Toast.LENGTH_LONG).show();
                     }
                 });
+
     }
 }

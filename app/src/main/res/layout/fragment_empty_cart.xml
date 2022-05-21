@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CartFragment">
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/IVEmptyCart"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_round_shopping_cart_24"
+                app:tint="@color/tomato" />
+
+            <TextView
+                android:id="@+id/TVEmptyCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/IVEmptyCart"
+                android:layout_centerInParent="true"
+                android:text="@string/your_cart_is_empty"
+                android:textSize="16sp"
+                android:layout_marginTop="18dp" />
+
+</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -12,5 +12,6 @@
     <color name="tomato">#f25757</color>
     <color name="indianred">#a66369</color>
     <color name="limegreen">#32CD32</color>
+    <color name="red">#FF0000</color>
 
 </resources>

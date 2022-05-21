@@ -2,6 +2,7 @@ package com.four_meals_dining;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class Popular_Meal_Adapter extends RecyclerView.Adapter<PopularViewholder> {
+
+    private static final String TAG = "Popular_Meal_Adapter";
 
     private Context context;
     private ArrayList<Meal_Model> Meal_ModelArrayList;
@@ -54,6 +64,16 @@ public class Popular_Meal_Adapter extends RecyclerView.Adapter<PopularViewholder
             @Override
             public void onClick(View v) {
 
+                FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+
+                // Choose time zone in which you want to interpret your Date
+                Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Central Africa"));
+                cal.setTime(date);
+                String todaysDate = dateFormat.format(date);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
                 progressDialog= new ProgressDialog(context);
                 progressDialog.setTitle("Adding to cart...");
                 progressDialog.show();
@@ -66,32 +86,27 @@ public class Popular_Meal_Adapter extends RecyclerView.Adapter<PopularViewholder
                 order .put("price", model.getPrice());
                 order .put("meal_imageSrc", model.getMeal_imageSrc());
                 order.put("Confirmed", confirmed);
+                order.put("Date", todaysDate);
+                order.put("Count", model.getCount()+1);
 
-                // Add a new document with a generated ID
-                db.collection("orders")
-                        .add(order )
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
+                if(firebaseUser!=null){
+                    String userID= firebaseUser.getUid();
+                    DocumentReference userDoc= db.collection("users").document(userID);
+                    userDoc.collection("orders").document(model.getMeal_name() + " " + day)
+                            .set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Log.d(TAG, "Order entry into database");
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                    }
                                 }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                if(progressDialog.isShowing()){
-                                    progressDialog.dismiss();
-                                    Toast.makeText(context, "Error adding meal" + e, Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
+                            });
+                }
 
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return Meal_ModelArrayList.size();
