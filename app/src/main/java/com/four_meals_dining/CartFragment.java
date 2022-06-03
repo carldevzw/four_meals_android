@@ -62,11 +62,13 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
          view= inflater.inflate(R.layout.fragment_cart, container, false);
 
-         if(initRecyclerView(view)){
+        initRecyclerView(view);
+
+       /*  if(initRecyclerView(view)){
              Log.i(TAG, "Returned recycler view");
          }else {
              view= inflater.inflate(R.layout.fragment_empty_cart, container, false);
-         }
+         }*/
 
 
          return view;

@@ -64,8 +64,8 @@ public class OrdersAdminFragment extends Fragment {
         db= FirebaseFirestore.getInstance();
         String TAG= "Orders Admin Error";
 
-        db.collection("orders")
-                .whereEqualTo("Confirmed", true).whereEqualTo("Date", todaysDate)
+        db.collection("meals")
+                .whereEqualTo("Date", todaysDate)
                 .orderBy("Count", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override

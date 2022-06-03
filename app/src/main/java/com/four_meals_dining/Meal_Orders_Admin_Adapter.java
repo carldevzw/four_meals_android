@@ -53,7 +53,6 @@ public class Meal_Orders_Admin_Adapter extends RecyclerView.Adapter<OrdersAdmin_
 
         Meal_Model model = Meal_ModelArrayList.get(position);
         holder.con_orderMealNameTV.setText(model.getMeal_name());
-        holder.con_orderMealPriceTV.setText(model.getPrice());
         holder.orderAmnt.setText(String.valueOf(model.getCount()));
 
         Glide.with(context)

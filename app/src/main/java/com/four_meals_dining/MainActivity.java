@@ -35,20 +35,21 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Meal_Model> mealModelArrayList;
     private BottomNavigationView bottomNavigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         bottomNavigationView= findViewById(R.id.nav_bottom);
+
         bottomNavigationView.setSelectedItemId(R.id.home);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             switch (item.getItemId()){
                 case R.id.home:{
-                    Intent openCart= new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(openCart);
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     overridePendingTransition(0,0);
                     break;
                 }
@@ -85,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
         mealRV= findViewById(R.id.RVMealItems);
         mealRV.setHasFixedSize(true);
+
         GridLayoutManager layoutManager=new GridLayoutManager(this,2);
 
         mealRV.setLayoutManager(layoutManager);
-
 
         db= FirebaseFirestore.getInstance();
 
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                         if(error != null){
-                            Log.w(TAG, "Snapshot may have returned null.");
+                            Log.d(TAG, "Snapshot may have returned null.");
                         }else {
                             assert value != null;
                             for(DocumentChange dc: value.getDocumentChanges()){

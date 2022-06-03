@@ -109,7 +109,9 @@ public class Popular_Meal_Adapter extends RecyclerView.Adapter<PopularViewholder
     }
     @Override
     public int getItemCount() {
-        return Meal_ModelArrayList.size();
+        int limit = 2;
+        return Math.min(Meal_ModelArrayList.size(), limit);
+     //   return Meal_ModelArrayList.size();
     }
 }
 
