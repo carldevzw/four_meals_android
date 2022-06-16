@@ -128,6 +128,7 @@ public class MealDetailsFragment extends Fragment {
                                     meal.put("meal_imageSrc", imageURL);
                                     meal.put("Count", 0);
                                     meal.put("Date", todaysDate);
+                                    meal.put("Ready", false);
 
                                     // Add a new document with a generated ID
                                     db.collection("meals").document(mealName + " " + day)

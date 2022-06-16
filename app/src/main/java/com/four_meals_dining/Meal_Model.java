@@ -10,16 +10,22 @@ public class Meal_Model {
     private String meal_imageSrc;
     private String documentID;
     private int Count;
+    boolean Ready;
 
-    public Meal_Model(String meal_name, String price, String meal_imageSrc, int Count) {
+    public Meal_Model(String meal_name, String price, String meal_imageSrc, int Count, boolean Ready) {
         this.meal_name = meal_name;
         this.price = price;
         this.meal_imageSrc = meal_imageSrc;
         this.Count= Count;
+        this.Ready= Ready;
     }
 
     public Meal_Model(){
 
+    }
+
+    public boolean isReady() {
+        return Ready;
     }
 
     public String getDocumentID() {

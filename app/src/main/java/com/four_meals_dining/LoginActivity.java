@@ -81,9 +81,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             userOrAdminLogin(username);
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+                            til_username.getEditText().setText(null);
+                            til_password.getEditText().setText(null);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), "Incorrect Password or Username!", Toast.LENGTH_LONG).show();
@@ -96,6 +97,8 @@ public class LoginActivity extends AppCompatActivity {
         if(username.contains("fourmealsapp.com")){
             Toast.makeText(getApplicationContext(), "Welcome Admin", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+
+
         }else{
             Toast.makeText(getApplicationContext(), "User Login Success", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));

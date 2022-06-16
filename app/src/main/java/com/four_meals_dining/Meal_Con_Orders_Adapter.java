@@ -39,6 +39,11 @@ public class Meal_Con_Orders_Adapter extends RecyclerView.Adapter<ConfirmedViewh
                 .placeholder(R.drawable.ic_baseline_no_food_24)
                 .centerCrop()
                 .into(holder.con_orderMealIV);
+
+        if(model.isReady()){
+            holder.switchMaterial.setChecked(true);
+        }
+
     }
     @Override
     public int getItemCount() {

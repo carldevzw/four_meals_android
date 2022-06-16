@@ -72,6 +72,12 @@ public class SignupActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                newUserSign(FirstName, Surname, Username, Password);
 
+                                til_con_password.getEditText().setText(null);
+                                til_su_password.getEditText().setText(null);
+                                til_fName.getEditText().setText(null);
+                                til_surname.getEditText().setText(null);
+                                til_su_username.getEditText().setText(null);
+
                                 Toast.makeText(getApplicationContext(), "Signup Successful", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                             }else{

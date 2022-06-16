@@ -21,17 +21,25 @@
         android:src="@drawable/egg_sandwich"
         android:layout_gravity="left"/>
 
-    <ImageButton
-        android:id="@+id/IBReady"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_baseline_event_available_24"
-        android:background="@null"
-        android:layout_gravity="top|end"
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchReady"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="24dp"
-        android:scaleType="fitCenter"
-        app:tint="@color/tomato" />
+        />
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/IBReady"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:src="@drawable/ic_baseline_event_available_24"-->
+<!--        android:background="@null"-->
+<!--        android:layout_gravity="top|end"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:tint="@color/tomato" />-->
 
     <TextView
         android:id="@+id/TVFoodItemOrder"

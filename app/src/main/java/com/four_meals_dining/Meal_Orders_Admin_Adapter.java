@@ -11,13 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Meal_Orders_Admin_Adapter extends RecyclerView.Adapter<OrdersAdmin_Viewholder> {
 
+    private static final String TAG = "Meal_Orders_Admin_Adapt";
     private Context context;
     private ArrayList<Meal_Model> Meal_ModelArrayList;
     FirebaseFirestore db;
@@ -26,6 +35,46 @@ public class Meal_Orders_Admin_Adapter extends RecyclerView.Adapter<OrdersAdmin_
         this.context = context;
         Meal_ModelArrayList = meal_ModelArrayList;
     }
+
+    public void setReady(int position){
+        Meal_Model model = Meal_ModelArrayList.get(position);
+        db= FirebaseFirestore.getInstance();
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        String userId= firebaseUser.getUid();
+
+        DocumentReference documentMealsReference= db.collection("meals").document(model.getDocumentID());
+        DocumentReference documentReference= db.collection("users").document(userId).collection("orders").document(model.getDocumentID());
+
+        Map<String, Object> mealReady = new HashMap<>();
+        mealReady.put("Ready", true);
+
+        documentReference.set(mealReady)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Log.d(TAG, "onComplete: Order ready.");
+
+                            documentMealsReference.set(mealReady)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Log.d(TAG, "Meal ready");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d(TAG, "Meal failed to set ready...");
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+
+    }
+
+
     public void count(int position) {
         String TAG= "Meal orders adapter.";
         Meal_Model model = Meal_ModelArrayList.get(position);
